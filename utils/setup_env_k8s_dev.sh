@@ -55,7 +55,7 @@ clean_kubectx() {
 set_kubectx_on_path() {
 cat << EOF >> "$HOME/.$1"
 #kubectx and kubens
-export PATH="$HOME"/.kubectx:\"$PATH"
+export PATH=\$HOME/.kubectx:\$PATH
 EOF
 }
 
