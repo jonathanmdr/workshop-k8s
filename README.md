@@ -63,6 +63,9 @@ Execute o script bash `deploy.sh` para subir a aplicação toda no cluster kuber
 ~$ ./deploy.sh
 ```
 
+ > O deploy da aplicação considera que exista um DNS válido informado na propriedade `host` nas regras de especificações do `Ingress`, para simular o comportamento em ambiente local com o `Minikube` é necessário mapear o `IP` do `Minikube` no arquivo localizado em `\etc\hosts`.
+ > O `IP` pode ser obtido através do seguinte comando: `minikube ip`.
+
 </br>
 
 [Deploy Application File](https://github.com/jonathanmdr/workshop-k8s/blob/master/utils/deploy.sh)
