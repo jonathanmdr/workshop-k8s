@@ -14,15 +14,13 @@ spec:
         path: "/app1"
         backend:
           service:
-            name: app1-svc
+            name: app1-service
             port:
-              number: 80
-              protocol: TCP
+              number: 80              
       - pathType: Prefix
         path: "/app2"
         backend:
           service:
-            name: app2-svc
+            name: app2-service
             port:
               number: 80
-              protocol: TCP
