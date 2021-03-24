@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  namespace: apps
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: workshop
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/app1"
+        backend:
+          service:
+            name: app1-svc
+            port:
+              number: 80
+              protocol: TCP
+      - pathType: Prefix
+        path: "/app2"
+        backend:
+          service:
+            name: app2-svc
+            port:
+              number: 80
+              protocol: TCP
