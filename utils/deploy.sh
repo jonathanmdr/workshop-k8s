@@ -10,6 +10,8 @@ APP1_RELEASE_NAME="app1"
 APP2_RELEASE_NAME="app2"
 INGRESS_RELEASE_NAME="app-ingress"
 
+CHARTS_PATH="../helm"
+
 RED=$(tput setaf 1)
 GREEN=$(tput setaf 2)
 YELLOW=$(tput setaf 3)
@@ -17,15 +19,15 @@ DEFAULT=$(tput sgr0)
 
 
 error_message() {
-    printf "\n\n${RED} ERROR: ${DEFAULT}%s" "$1"
+    printf "\n${RED} ERROR: ${DEFAULT}%s \n\n" "$1"
 }
 
 warning_message() {
-    printf "\n\n${YELLOW} WARNING: ${DEFAULT}%s" "$1"
+    printf "\n${YELLOW} WARNING: ${DEFAULT}%s \n\n" "$1"
 }
 
 info_message() {
-    printf "\n\n${GREEN} INFO: ${DEFAULT}%s" "$1"
+    printf "\n${GREEN} INFO: ${DEFAULT}%s \n\n" "$1"
 }
 
 validate_mandatory_resource() {
@@ -58,7 +60,7 @@ delete_namespace() {
 }
 
 deploy_app1() {
-    helm upgrade -f ./helm/app1/values.yaml "$APP1_RELEASE_NAME" ./helm/app1 --install --reuse-values
+    helm upgrade -f ./app1/values.yaml "$APP1_RELEASE_NAME" ./app1 --install --reuse-values
 }
 
 undeploy_app1() {
@@ -66,7 +68,7 @@ undeploy_app1() {
 }
 
 deploy_app2() {
-    helm upgrade -f ./helm/app2/values.yaml "$APP2_RELEASE_NAME" ./helm/app2 --install --reuse-values
+    helm upgrade -f ./app2/values.yaml "$APP2_RELEASE_NAME" ./app2 --install --reuse-values
 }
 
 undeploy_app2() {
@@ -74,7 +76,7 @@ undeploy_app2() {
 }
 
 deploy_ingress() {
-    helm upgrade -f ./helm/ingress/values.yaml "$INGRESS_RELEASE_NAME" ./helm/ingress --install --reuse-values
+    helm upgrade -f ./ingress/values.yaml "$INGRESS_RELEASE_NAME" ./ingress --install --reuse-values
 }
 
 undeploy_ingress() {
@@ -82,13 +84,14 @@ undeploy_ingress() {
 }
 
 deploy() {
-    cd .. && \
+    pushd "$CHARTS_PATH" && \
     kubectx "$CONTEXT" && \
     create_namespace && \
     kubens "$NAMESPACE" && \
     deploy_app1 && \
     deploy_app2 && \
     deploy_ingress && \
+    popd && \
     info_message "Deploy successfully"
 }
 

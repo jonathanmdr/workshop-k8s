@@ -11,15 +11,15 @@ DEFAULT=$(tput sgr0)
 
 
 error_message() {
-    printf "\n\n${RED} ERROR: ${DEFAULT}%s" "$1"
+    printf "\n${RED} ERROR: ${DEFAULT}%s \n\n" "$1"
 }
 
 warning_message() {
-    printf "\n\n${YELLOW} WARNING: ${DEFAULT}%s" "$1"
+    printf "\n${YELLOW} WARNING: ${DEFAULT}%s \n\n" "$1"
 }
 
 info_message() {
-    printf "\n\n${GREEN} INFO: ${DEFAULT}%s" "$1"
+    printf "\n${GREEN} INFO: ${DEFAULT}%s \n\n" "$1"
 }
 
 clean_kubectx_on_bashrc() {
