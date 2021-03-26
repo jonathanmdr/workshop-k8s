@@ -1,0 +1,27 @@
+deployment:
+  metadata:
+    name: app1
+    namespace: apps
+  spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app1
+    spec:
+      container:
+        name: app1        
+        env:
+          value: Sinccera Team
+        resources:
+          limits:
+            cpu: 10m
+            memory: 20Mi
+          requests:
+            cpu: 10m
+            memory: 20Mi
+
+service:
+  metadata:
+    name: app1-service
+    namespace: apps

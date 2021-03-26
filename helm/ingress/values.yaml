@@ -1,0 +1,17 @@
+ingress:
+  metadata:
+    name: app-ingress
+    namespace: apps
+  spec:
+    rules:
+      host: workshop-k8s
+      http:
+        paths:        
+        - path: "/app1"
+          backend:
+            service:
+              name: app1-service        
+        - path: "/app2"
+          backend:
+            service:
+              name: app2-service

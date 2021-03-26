@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.metadata.name }}
+  namespace: {{ .Values.deployment.metadata.namespace }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.template.metadata.labels.app }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.template.metadata.labels.app }}
+    spec:
+      containers:
+      - name: {{ .Values.deployment.template.spec.container.name }}
+        image: dockersamples/static-site
+        env:
+        - name: AUTHOR
+          value: {{ .Values.deployment.template.spec.container.env.value }}
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: {{ .Values.deployment.template.spec.container.resources.limits.cpu }}
+            memory: {{ .Values.deployment.template.spec.container.resources.limits.memory }}
+          requests:
+            cpu: {{ .Values.deployment.template.spec.container.resources.requests.cpu }}
+            memory: {{ .Values.deployment.template.spec.container.resources.requests.memory }}

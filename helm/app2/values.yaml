@@ -1,0 +1,27 @@
+deployment:
+  metadata:
+    name: app2
+    namespace: apps
+  spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app2
+    spec:
+      container:
+        name: app2    
+        env:
+          value: Workshop K8s
+        resources:
+          limits:
+            cpu: 10m
+            memory: 20Mi
+          requests:
+            cpu: 10m
+            memory: 20Mi
+
+service:
+  metadata:
+    name: app2-service
+    namespace: apps
