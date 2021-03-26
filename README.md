@@ -39,7 +39,6 @@ Componentes da instalação |
 #### Exemplo de uso:
 
 ```bash
-~$ chmod +x setup_env_k8s_dev.sh
 ~$ ./setup_env_k8s_dev.sh bash #Para quem utiliza o .bashrc
 ~$ ./setup_env_k8s_dev.sh zsh #Para quem utiliza o .zshrc
 ```
@@ -59,12 +58,12 @@ Execute o script bash `deploy.sh` para subir a aplicação toda no cluster kuber
 #### Exemplo de uso:
 
 ```bash
-~$ chmod +x deploy.sh
 ~$ ./deploy.sh
 ```
 
- > O deploy da aplicação considera que exista um DNS válido informado na propriedade `host` nas regras de especificações do `Ingress`, para simular o comportamento em ambiente local com o `Minikube` é necessário mapear o `IP` do `Minikube` no arquivo localizado em `\etc\hosts`.
+ > O deploy da aplicação considera que exista um DNS válido informado na propriedade `host` nas regras de especificações do `Ingress`, para simular o comportamento em ambiente local com o `Minikube` é necessário mapear o `IP` do `Minikube` no arquivo localizado em `/etc/hosts`.
  > O `IP` pode ser obtido através do seguinte comando: `minikube ip`.
+ > O nosso DNS que deve ser configurado é: `workshop-k8s`.
 
 </br>
 
