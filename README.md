@@ -1,4 +1,4 @@
-# kubernetes
+# Workshop Introdução ao kubernetes
 Workshop sobre Kubernetes, conhecendo e aplicando alguns conceitos básicos de uso do k8s.
 
 Também conheceremos e aplicaremos os conceitos de uso do helm como gerenciador de pacotes para aplicações em cluster kubernetes.
