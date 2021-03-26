@@ -2,108 +2,113 @@
 
 set -e
 
-NAMESPACE="news-project"
+CONTEXT="minikube"
+NAMESPACE="apps"
 NOT_FOUND="not found"
 
-DATABASE_RELEASE_NAME="database-noticias"
-ADMIN_RELEASE_NAME="administration-noticias"
-PORTAL_RELEASE_NAME="portal-noticias"
+APP1_RELEASE_NAME="app1"
+APP2_RELEASE_NAME="app2"
+INGRESS_RELEASE_NAME="app-ingress"
 
-have_minikube=$(which minikube || echo "$NOT_FOUND")
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+DEFAULT=$(tput sgr0)
 
-if [[ "$have_minikube" == "$NOT_FOUND" ]]; then
-    echo "'minikube' not found, this is mandatory"
-    exit 1
-fi
 
-have_kubectl=$(which kubectl || echo "$NOT_FOUND")
+error_message() {
+    printf "\n\n${RED} ERROR: ${DEFAULT}%s \n\n" "$1"
+}
 
-if [[ "$have_kubectl" == "$NOT_FOUND" ]]; then
-    echo "'kubectl' not found, this is mandatory"
-    exit 1
-fi
+warning_message() {
+    printf "\n\n${YELLOW} WARNING: ${DEFAULT}%s \n\n" "$1"
+}
 
-have_kubectx=$(which kubectx || echo "$NOT_FOUND")
+info_message() {
+    printf "\n\n${GREEN} INFO: ${DEFAULT}%s \n\n" "$1"
+}
 
-if [[ "$have_kubectx" == "$NOT_FOUND" ]]; then
-    echo "'kubectx' not found, this is mandatory"
-    exit 1
-fi
+validate_mandatory_resource() {
+    resource_exists=$(which "$1" || echo "$RESOURCE_NOT_FOUND")
 
-have_kubens=$(which kubens || echo "$NOT_FOUND")
+    if [[ "$resource_exists" == "$RESOURCE_NOT_FOUND" ]]; then
+        warning_message "'$1' not found, this is mandatory."
+        exit 1
+    fi
+}
 
-if [[ "$have_kubens" == "$NOT_FOUND" ]]; then
-    echo "'kubens' not found, this is mandatory"
-    exit 1
-fi
+startup_validation() {
+    resources_required=("minikube" "kubectl" "kubectx" "kubens" "helm")
 
-have_helm=$(which helm || echo "$NOT_FOUND")
-
-if [[ "$have_helm" == "$NOT_FOUND" ]]; then
-    echo "'helm' not found, this is mandatory"
-    exit 1
-fi
+    for resource in "${resources_required[@]}"; do
+        validate_mandatory_resource "$resource"
+    done
+}
 
 create_namespace() {
     namespace=$(kubens | grep "$NAMESPACE" || echo "$NOT_FOUND")
 
     if [[ "$namespace" == "$NOT_FOUND" ]]; then
-        kubectl create namespace "$NAMESPACE"    
-    fi        
+        kubectl create namespace "$NAMESPACE"
+    fi
 }
 
 delete_namespace() {
     kubectl delete namespace "$NAMESPACE"
 }
 
-deploy_database() {
-    helm upgrade -f ./helm/database/values.yaml "$DATABASE_RELEASE_NAME" ./helm/database --install --force
+deploy_app1() {
+    helm upgrade -f ./helm/app1/values.yaml "$APP1_RELEASE_NAME" ./helm/app1 --install --reuse-values
 }
 
-undeploy_database() {
-    helm uninstall "$DATABASE_RELEASE_NAME"
+undeploy_app1() {
+    helm uninstall "$APP1_RELEASE_NAME"
 }
 
-deploy_administration() {
-    helm upgrade -f ./helm/administration/values.yaml "$ADMIN_RELEASE_NAME" ./helm/administration --install --force
+deploy_app2() {
+    helm upgrade -f ./helm/app2/values.yaml "$APP2_RELEASE_NAME" ./helm/app2 --install --reuse-values
 }
 
-undeploy_administration() {
-    helm uninstall "$ADMIN_RELEASE_NAME"
+undeploy_app2() {
+    helm uninstall "$APP2_RELEASE_NAME"
 }
 
-deploy_portal() {
-    helm upgrade -f ./helm/portal/values.yaml "$PORTAL_RELEASE_NAME" ./helm/portal --install --force
+deploy_ingress() {
+    helm upgrade -f ./helm/ingress/values.yaml "$INGRESS_RELEASE_NAME" ./helm/ingress --install --reuse-values
 }
 
-undeploy_portal() {
-    helm uninstall "$PORTAL_RELEASE_NAME"
+undeploy_ingress() {
+    helm uninstall "$INGRESS_RELEASE_NAME"
 }
 
 deploy() {
     cd .. && \
-    kubectx minikube && \
+    kubectx "$CONTEXT" && \
     create_namespace && \
     kubens "$NAMESPACE" && \
-    deploy_database && \
-    deploy_administration && \
-    deploy_portal
+    deploy_app1 && \
+    deploy_app2 && \
+    deploy_ingress && \
+    info_message "Deploy successfully"
 }
 
 undeploy() {
-    kubectx minikube && \
+    kubectx "$CONTEXT" && \
     kubens "$NAMESPACE" && \
-    undeploy_portal && \
-    undeploy_administration && \
-    undeploy_database && \
+    undeploy_ingress && \
+    undeploy_app2 && \
+    undeploy_app1 && \
     delete_namespace && \
-    printf "\n\n\033[4;33m WARNING: PVs are not excluded from the cluster automatically, a manual intervention is required. \033[0m\n\n"    
+    warning_message "PVs are not excluded from the cluster automatically, a manual intervention is required." && \
+    info_message "Undeploy successfully"
 }
+
+startup_validation
 
 if [ -z "$1" ]; then
     while [ -z "$parameter" ]
     do
-        read -rp "Inform a parameter: (up/down) -> " parameter        
+        read -rp "Inform a parameter: (up/down) -> " parameter
     done
 else
     parameter="$1"
@@ -119,7 +124,7 @@ case "$parameter" in
     ;;
 
     *)
-        printf "\033[4;33m WARNING: Invalid parameter \033[0m\n\n"        
-        echo "Usage: './deploy.sh up' or './deploy.sh down'"
+    error_message "The parameter does not valid."
+    exit 1
     ;;
 esac
