@@ -17,15 +17,15 @@ DEFAULT=$(tput sgr0)
 
 
 error_message() {
-    printf "\n\n${RED} ERROR: ${DEFAULT}%s \n\n" "$1"
+    printf "\n\n${RED} ERROR: ${DEFAULT}%s" "$1"
 }
 
 warning_message() {
-    printf "\n\n${YELLOW} WARNING: ${DEFAULT}%s \n\n" "$1"
+    printf "\n\n${YELLOW} WARNING: ${DEFAULT}%s" "$1"
 }
 
 info_message() {
-    printf "\n\n${GREEN} INFO: ${DEFAULT}%s \n\n" "$1"
+    printf "\n\n${GREEN} INFO: ${DEFAULT}%s" "$1"
 }
 
 validate_mandatory_resource() {
