@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app2-configmap
+  namespace: apps
+data:
+  AUTHOR: Workshop K8s

@@ -11,8 +11,6 @@ deployment:
     spec:
       container:
         name: app1-container
-        env:
-          value: Sinccera Team
         resources:
           limits:
             cpu: 10m
@@ -25,3 +23,10 @@ service:
   metadata:
     name: app1-service
     namespace: apps
+
+configmap:
+  metadata:
+    name: app1-configmap
+    namespace: apps
+  data:
+    AUTHOR: Sinccera Team

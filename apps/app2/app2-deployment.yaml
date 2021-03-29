@@ -16,11 +16,11 @@ spec:
       containers:
       - name: app2-container
         image: dockersamples/static-site
-        env:
-        - name: AUTHOR
-          value: Workshop k8s
         ports:
         - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: app2-configmap
         resources:
           limits:
             cpu: 10m

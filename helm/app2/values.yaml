@@ -25,3 +25,10 @@ service:
   metadata:
     name: app2-service
     namespace: apps
+
+configmap:
+  metadata:
+    name: app2-configmap
+    namespace: apps
+  data:
+    AUTHOR: Workshop K8s

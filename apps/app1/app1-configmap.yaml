@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app1-configmap
+  namespace: apps
+data:
+  AUTHOR: Sinccera Team

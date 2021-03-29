@@ -16,11 +16,11 @@ spec:
       containers:
       - name: {{ .Values.deployment.template.spec.container.name }}
         image: dockersamples/static-site
-        env:
-        - name: AUTHOR
-          value: {{ .Values.deployment.template.spec.container.env.value }}
         ports:
         - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: {{ .Values.configmap.metadata.name }}
         resources:
           limits:
             cpu: {{ .Values.deployment.template.spec.container.resources.limits.cpu }}
