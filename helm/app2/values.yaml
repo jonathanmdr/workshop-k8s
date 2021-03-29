@@ -3,14 +3,14 @@ deployment:
     name: app2
     namespace: apps
   spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
         app: app2
     spec:
       container:
-        name: app2    
+        name: app2-container
         env:
           value: Workshop K8s
         resources:

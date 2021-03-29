@@ -3,14 +3,14 @@ deployment:
     name: app1
     namespace: apps
   spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
         app: app1
     spec:
       container:
-        name: app1        
+        name: app1-container
         env:
           value: Sinccera Team
         resources:
