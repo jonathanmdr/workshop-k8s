@@ -4,6 +4,7 @@ set -e
 
 KUBECTX_REPOSITORY="https://github.com/ahmetb/kubectx.git"
 RESOURCE_NOT_FOUND="not found"
+
 RED=$(tput setaf 1)
 GREEN=$(tput setaf 2)
 YELLOW=$(tput setaf 3)
