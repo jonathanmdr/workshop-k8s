@@ -64,7 +64,8 @@ Execute o script bash `deploy.sh` para subir a aplicação toda no cluster kuber
 #### Exemplo de uso:
 
 ```bash
-~$ ./deploy.sh
+~$ ./deploy.sh up #Para fazer o deploy da aplicação
+~$ ./deploy.sh down #Para fazer o undeploy da aplicação
 ```
 
  > O deploy da aplicação considera que exista um DNS válido informado na propriedade `host` nas regras de especificações do `Ingress`, para simular o comportamento em ambiente local com o `Minikube` é necessário mapear o `IP` do `Minikube` no arquivo localizado em `/etc/hosts`.
