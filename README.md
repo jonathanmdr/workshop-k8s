@@ -12,6 +12,12 @@ O projeto consiste em dois microsserviços simples baseados no NGINX, ambos poss
 
 </br>
 
+## Arquitetura do projeto:
+
+[![node](https://github.com/jonathanmdr/workshop-k8s/blob/master/docs/architecture.png)](https://github.com/jonathanmdr/workshop-k8s/blob/master)
+
+</br>
+
 ## Setup Ambiente Linux:
 
 Execute o script bash `setup_env_k8s_dev.sh` para montar o ambiente com os recursos necessários.
