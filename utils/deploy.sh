@@ -4,6 +4,7 @@ set -e
 
 CONTEXT="minikube"
 NAMESPACE="apps"
+DEFAULT_NAMESPACE="default"
 NOT_FOUND="not found"
 
 APP1_RELEASE_NAME="app1"
@@ -92,6 +93,7 @@ deploy() {
     deploy_app2 && \
     deploy_ingress && \
     popd && \
+    kubens "$DEFAULT_NAMESPACE" && \
     info_message "Deploy successfully"
 }
 
@@ -103,6 +105,7 @@ undeploy() {
     undeploy_app1 && \
     delete_namespace && \
     warning_message "PVs are not excluded from the cluster automatically, a manual intervention is required." && \
+    kubens "$DEFAULT_NAMESPACE" && \
     info_message "Undeploy successfully"
 }
 
