@@ -132,9 +132,9 @@ install_minikube() {
     minikube addons enable ingress && \
     minikube addons enable dashboard && \
     minikube addons enable metrics-server && \
-    printf "\n\n\033[4;33m Enabled Addons \033[0m" && \
+    info_message "Enabled Addons: " && \
     minikube addons list | grep STATUS && minikube addons list | grep enabled && \
-    printf "\n\n\033[4;33m Current status of Minikube \033[0m" && \
+    info_message "Current status of Minikube: " && \
     minikube status
 }
 
