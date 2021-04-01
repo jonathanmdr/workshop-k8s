@@ -25,14 +25,14 @@ info_message() {
 
 clean_kubectx_on_bashrc() {
     SYMLINKDIR=$(pkg-config --variable=completionsdir bash-completion)
-    sudo rm -rf "$HOME"/.kubectx || true && \
-    sudo rm "$SYMLINKDIR"/kubens || true && \
+    sudo rm -rf "$HOME"/.kubectx || true
+    sudo rm "$SYMLINKDIR"/kubens || true
     sudo rm "$SYMLINKDIR"/kubectx || true
 }
 
 clean_kubectx_on_zshrc() {
-    sudo rm -rf "$HOME"/.kubectx || true && \
-    sudo rm "$HOME"/.oh-my-zsh/completions/_kubens.zsh || true && \
+    sudo rm -rf "$HOME"/.kubectx || true
+    sudo rm "$HOME"/.oh-my-zsh/completions/_kubens.zsh || true
     sudo rm "$HOME"/.oh-my-zsh/completions/_kubectx.zsh || true
 }
 
