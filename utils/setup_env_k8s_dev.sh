@@ -138,6 +138,15 @@ install_minikube() {
     minikube status
 }
 
+validate_resource_installation_type_not_supported() {
+    resource_exists=$(snap list | grep "$1" || echo "$RESOURCE_NOT_FOUND")
+
+    if [[ "$resource_exists" != "$RESOURCE_NOT_FOUND" ]]; then
+        warning_message "'$1' installation type doesn't support, consider installing the '$1' using a package manager"
+        exit 1
+    fi
+}
+
 validate_mandatory_resource() {
     resource_exists=$(which "$1" || echo "$RESOURCE_NOT_FOUND")
 
@@ -152,6 +161,7 @@ startup_validation() {
 
     for resource in "${resources_required[@]}"; do
         validate_mandatory_resource "$resource"
+        validate_resource_installation_type_not_supported "$resource"
     done
 }
 
