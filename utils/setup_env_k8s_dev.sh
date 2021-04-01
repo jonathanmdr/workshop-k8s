@@ -160,9 +160,14 @@ startup_validation() {
     resources_required=("curl" "git" "docker")
 
     for resource in "${resources_required[@]}"; do
-        validate_mandatory_resource "$resource"
+        validate_mandatory_resource "$resource" && \
         validate_resource_installation_type_not_supported "$resource"
     done
+}
+
+process_docker_basic_config() {
+    sudo usermod -aG docker "$USER" && \
+    sudo systemctl restart docker
 }
 
 process_kubectx_installation() {
@@ -210,6 +215,7 @@ process_minikube_installation() {
 }
 
 main() {
+    process_docker_basic_config && \
     process_kubectx_installation "$1" && \
     process_kubectl_installation && \
     process_helm_installation && \
