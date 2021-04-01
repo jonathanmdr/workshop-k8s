@@ -18,7 +18,7 @@ O projeto consiste em dois microsserviços simples baseados no NGINX, ambos poss
 
 </br>
 
-## Setup Ambiente Linux:
+## Setup Ambiente Linux (Baseados em Ubuntu):
 
 Execute o script bash `setup_env_k8s_dev.sh` para montar o ambiente com os recursos necessários.
 
