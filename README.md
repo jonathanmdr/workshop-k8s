@@ -22,7 +22,7 @@ O projeto consiste em dois microsserviços simples baseados no NGINX, ambos poss
 
 Execute o script bash `setup_env_k8s_dev.sh` para montar o ambiente com os recursos necessários.
 
- > :warning:  O script foi criado e testado somente em distribuições baseadas no Ubuntu.
+ > :warning:  O script foi testado somente em distribuições baseadas no Ubuntu.
 
 </br>
 
@@ -61,7 +61,7 @@ Componentes da instalação |
 
 Execute o script bash `deploy.sh` para subir a aplicação toda no cluster kubernetes local configurado anteriormente no setup.
 
- > :warning:  O script foi criado e testado somente em distribuições baseadas no Ubuntu.
+ > :warning:  O script foi testado somente em distribuições baseadas no Ubuntu.
 
 </br>
 
