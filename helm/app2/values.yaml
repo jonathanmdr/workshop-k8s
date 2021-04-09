@@ -9,10 +9,13 @@ deployment:
       labels:
         app: app2
     spec:
-      container:
-        name: app2-container
-        env:
-          value: Workshop K8s
+      containers:
+      - name: app2-container
+        image: dockersamples/static-site
+        containerPort: 80
+        envFrom:
+          configMapRef:
+            name: app2-configmap
         resources:
           limits:
             cpu: 10m

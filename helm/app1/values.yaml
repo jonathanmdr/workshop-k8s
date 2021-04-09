@@ -9,8 +9,13 @@ deployment:
       labels:
         app: app1
     spec:
-      container:
-        name: app1-container
+      containers:
+      - name: app1-container
+        image: dockersamples/static-site
+        containerPort: 80
+        envFrom:
+          configMapRef:
+            name: app1-configmap
         resources:
           limits:
             cpu: 10m

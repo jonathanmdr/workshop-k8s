@@ -14,17 +14,19 @@ spec:
         app: {{ .Values.deployment.template.metadata.labels.app }}
     spec:
       containers:
-      - name: {{ .Values.deployment.template.spec.container.name }}
-        image: dockersamples/static-site
+      {{- range .Values.deployment.template.spec.containers }}
+      - name: {{ .name }}
+        image: {{ .image }}
         ports:
-        - containerPort: 80
-        envFrom:
+        - containerPort: {{ .containerPort }}
+        envFrom:           
         - configMapRef:
-            name: {{ .Values.configmap.metadata.name }}
+            name: {{ .envFrom.configMapRef.name }}
         resources:
           limits:
-            cpu: {{ .Values.deployment.template.spec.container.resources.limits.cpu }}
-            memory: {{ .Values.deployment.template.spec.container.resources.limits.memory }}
+            cpu: {{ .resources.limits.cpu }}
+            memory: {{ .resources.limits.memory }}
           requests:
-            cpu: {{ .Values.deployment.template.spec.container.resources.requests.cpu }}
-            memory: {{ .Values.deployment.template.spec.container.resources.requests.memory }}
+            cpu: {{ .resources.requests.cpu }}
+            memory: {{ .resources.requests.memory }}
+      {{ end }}
