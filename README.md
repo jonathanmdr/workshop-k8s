@@ -3,9 +3,9 @@ Workshop sobre Kubernetes, conhecendo e aplicando alguns conceitos básicos de u
 
 Também conheceremos e aplicaremos os conceitos de uso do helm como gerenciador de pacotes para aplicações em cluster kubernetes.
 
-[![node](https://img.shields.io/badge/Kubernetes-stable-blue.svg)](https://kubernetes.io)
-[![node](https://img.shields.io/badge/Minikube-v1.18.1-blue.svg)](https://minikube.sigs.k8s.io)
-[![node](https://img.shields.io/badge/Helm-v3.5.3-blue.svg)](https://helm.sh/)
+[![node](https://img.shields.io/badge/Kubernetes-v1.20.2-blue.svg)](https://kubernetes.io)
+[![node](https://img.shields.io/badge/Minikube-v1.20.0-blue.svg)](https://minikube.sigs.k8s.io)
+[![node](https://img.shields.io/badge/Helm-v3.6.0-blue.svg)](https://helm.sh/)
 
 ## Sobre o Projeto:
 O projeto consiste em dois microsserviços simples baseados no NGINX, ambos possuem uma variável de ambiente de nome `AUTHOR` onde podemos passar um nome ou algo que desejemos que seja exibido junto a mensagem de boas vindas ao acessar o serviço.
