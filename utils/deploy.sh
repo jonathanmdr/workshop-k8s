@@ -31,6 +31,15 @@ info_message() {
     printf "\n${GREEN} INFO: ${DEFAULT}%s \n\n" "$1"
 }
 
+validate_minikube_status() {
+    is_stopped=$(minikube status | grep Stopped || echo RUNNING)
+
+    if [[ "$is_stopped" != "RUNNING" ]]; then
+        warning_message "the minikube instance is stopped, to run the minikube run the command 'minikube start'."
+        exit 1
+    fi
+}
+
 validate_mandatory_resource() {
     resource_exists=$(which "$1" || echo "$RESOURCE_NOT_FOUND")
 
@@ -85,6 +94,7 @@ undeploy_ingress() {
 }
 
 deploy() {
+    validate_minikube_status && \
     pushd "$CHARTS_PATH" && \
     kubectx "$CONTEXT" && \
     create_namespace && \
@@ -98,6 +108,7 @@ deploy() {
 }
 
 undeploy() {
+    validate_minikube_status && \
     kubectx "$CONTEXT" && \
     kubens "$NAMESPACE" && \
     undeploy_ingress && \
