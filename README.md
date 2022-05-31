@@ -20,7 +20,7 @@ O projeto consiste em dois microsserviços simples baseados no NGINX, ambos poss
 
 ## Setup Ambiente Linux:
 
-Execute o script bash `setup_env_k8s_dev.sh` para montar o ambiente com os recursos necessários.
+Execute o script bash `linux_ubuntu_setup.sh` para montar o ambiente com os recursos necessários.
 
  > :warning:  O script foi testado somente em distribuições baseadas em Ubuntu.
 
@@ -47,13 +47,13 @@ Componentes da instalação |
 #### Exemplo de uso:
 
 ```bash
-~$ ./setup_env_k8s_dev.sh bash #Para quem utiliza o .bashrc
-~$ ./setup_env_k8s_dev.sh zsh #Para quem utiliza o .zshrc
+~$ ./linux_ubuntu_setup.sh bash #Para quem utiliza o .bashrc
+~$ ./linux_ubuntu_setup.sh zsh #Para quem utiliza o .zshrc
 ```
 
 </br>
 
-[Setup Linux File](https://github.com/jonathanmdr/workshop-k8s/blob/master/utils/setup_env_k8s_dev.sh)
+[Setup Linux File](https://github.com/jonathanmdr/workshop-k8s/blob/master/utils/linux_ubuntu_setup.sh)
 
 </br>
 

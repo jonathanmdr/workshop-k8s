@@ -34,4 +34,4 @@ configmap:
     name: app1-configmap
     namespace: apps
   data:
-    AUTHOR: Sinccera Team
+    AUTHOR: Meu Extrato Favorito
