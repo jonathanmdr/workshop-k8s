@@ -3,9 +3,9 @@ Workshop sobre Kubernetes, conhecendo e aplicando alguns conceitos básicos de u
 
 Também conheceremos e aplicaremos os conceitos de uso do helm como gerenciador de pacotes para aplicações em cluster kubernetes.
 
-[![node](https://img.shields.io/badge/Kubernetes-v1.20.2-blue.svg)](https://kubernetes.io)
-[![node](https://img.shields.io/badge/Minikube-v1.20.0-blue.svg)](https://minikube.sigs.k8s.io)
-[![node](https://img.shields.io/badge/Helm-v3.6.0-blue.svg)](https://helm.sh/)
+[![node](https://img.shields.io/badge/Kubernetes-v1.24-blue.svg)](https://kubernetes.io)
+[![node](https://img.shields.io/badge/Minikube-v1.25.2-blue.svg)](https://minikube.sigs.k8s.io)
+[![node](https://img.shields.io/badge/Helm-v3.8.2-blue.svg)](https://helm.sh/)
 
 ## Sobre o Projeto:
 O projeto consiste em dois microsserviços simples baseados no NGINX, ambos possuem uma variável de ambiente de nome `AUTHOR` onde podemos passar um nome ou algo que desejemos que seja exibido junto a mensagem de boas vindas ao acessar o serviço.
@@ -18,23 +18,24 @@ O projeto consiste em dois microsserviços simples baseados no NGINX, ambos poss
 
 </br>
 
-## Setup Ambiente Linux:
+## Setup Ambiente:
 
-Execute o script bash `linux_ubuntu_setup.sh` para montar o ambiente com os recursos necessários.
+Execute o script bash `*_setup.sh` para montar o ambiente com os recursos necessários de acordo com o seu sistema operacional.
 
- > :warning:  O script foi testado somente em distribuições baseadas em Ubuntu.
-
-</br>
-
-Pré-requisitos |
---|
-`curl` |
-`git` |
-`docker` |
+ > :warning:  O script foi testado somente em distribuições baseadas em Ubuntu e Mac M1.
 
 </br>
 
-Componentes da instalação |
+Requirements | Linux | Mac
+--|--|--|
+`curl` | Yes | Yes
+`git` | Yes | Yes
+`docker` | Yes | Yes
+`brew` | No | Yes
+
+</br>
+
+Installation Components |
 --|
 `kubectx` |
 `kubens` |
@@ -46,14 +47,31 @@ Componentes da instalação |
 
 #### Exemplo de uso:
 
+##### Linux:
 ```bash
 ~$ ./linux_ubuntu_setup.sh bash #Para quem utiliza o .bashrc
 ~$ ./linux_ubuntu_setup.sh zsh #Para quem utiliza o .zshrc
 ```
 
+##### Mac M1:
+```bash
+~$ ./mac_m1_setup.sh bash #Para quem utiliza o .bashrc
+~$ ./mac_m1_setup.sh zsh #Para quem utiliza o .zshrc
+```
+
+##### Mac x86-64:
+```bash
+~$ ./mac_x86_64_setup.sh bash #Para quem utiliza o .bashrc
+~$ ./mac_x86_64_setup.sh zsh #Para quem utiliza o .zshrc
+```
+
 </br>
 
 [Setup Linux File](https://github.com/jonathanmdr/workshop-k8s/blob/master/utils/linux_ubuntu_setup.sh)
+</br>
+[Setup Mac M1 File](https://github.com/jonathanmdr/workshop-k8s/blob/master/utils/mac_m1_setup.sh)
+</br>
+[Setup Mac x86-64 File](https://github.com/jonathanmdr/workshop-k8s/blob/master/utils/mac_x86_64_setup.sh)
 
 </br>
 
@@ -61,7 +79,7 @@ Componentes da instalação |
 
 Execute o script bash `deploy.sh` para subir a aplicação toda no cluster kubernetes local configurado anteriormente no setup.
 
- > :warning:  O script foi testado somente em distribuições baseadas em Ubuntu.
+ > :warning:  O script foi testado somente em distribuições Linux baseadas em Ubuntu e Mac M1.
 
 </br>
 
