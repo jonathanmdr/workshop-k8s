@@ -116,8 +116,8 @@ clean_minikube() {
 }
 
 install_minikube() {
-    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-arm64 && \
-    sudo install minikube-darwin-arm64 /usr/local/bin/minikube && \
+    sudo curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-arm64 && \
+    sudo install minikube /usr/local/bin/minikube && \
     sudo rm minikube && \
     minikube start --driver=docker && \
     minikube addons enable ingress && \
