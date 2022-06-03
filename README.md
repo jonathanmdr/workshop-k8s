@@ -33,7 +33,7 @@ Execute o script bash `*_setup.sh` para montar o ambiente com os recursos necess
 Requirements | Linux | Mac
 --|--|--|
 `curl` | Yes | Yes
-`git` | Yes | Yes
+`git` | Yes | No
 `docker` | Yes | Yes
 `brew` | No | Yes
 
@@ -61,15 +61,13 @@ Installation Components |
 #### Mac M1
 
 ```bash
-~$ ./mac_m1_setup.sh bash #Para quem utiliza o .bashrc
-~$ ./mac_m1_setup.sh zsh #Para quem utiliza o .zshrc
+~$ ./mac_m1_setup.sh
 ```
 
 #### Mac x86-64
 
 ```bash
-~$ ./mac_x86_64_setup.sh bash #Para quem utiliza o .bashrc
-~$ ./mac_x86_64_setup.sh zsh #Para quem utiliza o .zshrc
+~$ ./mac_x86_64_setup.sh
 ```
 
 </br>

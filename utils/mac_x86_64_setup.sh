@@ -2,7 +2,6 @@
 
 set -e
 
-KUBECTX_REPOSITORY="https://github.com/ahmetb/kubectx.git"
 RESOURCE_NOT_FOUND="not found"
 
 RED=$(tput setaf 1)
@@ -23,83 +22,8 @@ info_message() {
     printf "\n${GREEN} INFO: ${DEFAULT}%s \n\n" "$1"
 }
 
-clean_kubectx_on_bashrc() {
-    SYMLINKDIR=$(pkg-config --variable=completionsdir bash-completion)
-    sudo rm -rf "$HOME"/.kubectx || true
-    sudo rm "$SYMLINKDIR"/kubens || true
-    sudo rm "$SYMLINKDIR"/kubectx || true
-}
-
-clean_kubectx_on_zshrc() {
-    sudo rm -rf "$HOME"/.kubectx || true
-    sudo rm "$HOME"/.oh-my-zsh/completions/_kubens.zsh || true
-    sudo rm "$HOME"/.oh-my-zsh/completions/_kubectx.zsh || true
-}
-
-clean_kubectx() {
-    case "$1" in
-        bash)
-        clean_kubectx_on_bashrc
-        ;;
-
-        zsh)
-        clean_kubectx_on_zshrc
-        ;;
-
-        *)
-        error_message "Invalid parameter."
-        exit 1
-        ;;
-    esac
-}
-
-set_kubectx_on_path() {
-cat << EOF >> "$HOME/.$1"
-#kubectx and kubens
-export PATH=\$HOME/.kubectx:\$PATH
-EOF
-}
-
-update_path_if_necessary() {
-    kubectx_exported=$(cat "$HOME/.$1" | grep "kubectx and kubens" || echo "$RESOURCE_NOT_FOUND")
-
-    if [[ "$kubectx_exported" == "$RESOURCE_NOT_FOUND" ]]; then
-        set_kubectx_on_path "$1"
-    fi
-}
-
-install_kubectx_on_bashrc() {
-    SYMLINKDIR=$(pkg-config --variable=completionsdir bash-completion) && \
-    sudo ln -sf "$HOME"/.kubectx/completion/kubens.bash "$SYMLINKDIR"/kubens && \
-    sudo ln -sf "$HOME"/.kubectx/completion/kubectx.bash "$SYMLINKDIR"/kubectx && \
-    update_path_if_necessary "bashrc"
-}
-
-install_kubectx_on_zshrc() {
-    sudo mkdir -p "$HOME"/.oh-my-zsh/completions && \
-    sudo chmod -R 755 "$HOME"/.oh-my-zsh/completions && \
-    sudo ln -s "$HOME"/.kubectx/completion/kubens.zsh "$HOME"/.oh-my-zsh/completions/_kubens.zsh && \
-    sudo ln -s "$HOME"/.kubectx/completion/kubectx.zsh "$HOME"/.oh-my-zsh/completions/_kubectx.zsh && \
-    update_path_if_necessary "zshrc"
-}
-
 install_kubectx() {    
-    git clone "$KUBECTX_REPOSITORY" "$HOME"/.kubectx
-
-    case "$1" in
-        bash)
-        install_kubectx_on_bashrc
-        ;;
-
-        zsh)
-        install_kubectx_on_zshrc
-        ;;
-
-        *)
-        error_message "Invalid parameter."
-        exit 1
-        ;;
-    esac
+    brew install kubectx
 }
 
 install_kubectl() {
@@ -139,7 +63,7 @@ validate_mandatory_resource() {
 }
 
 startup_validation() {
-    resources_required=("curl" "git" "docker" "brew")
+    resources_required=("curl" "docker" "brew")
 
     for resource in "${resources_required[@]}"; do
         validate_mandatory_resource "$resource"
@@ -151,11 +75,7 @@ process_kubectx_installation() {
 
     if [[ "$resource" == "$RESOURCE_NOT_FOUND" ]]; then
         info_message "'kubectx' not found, installation in progress..."
-        install_kubectx "$1"
-    else
-        info_message "'kubectx' found, updating to latest version..."
-        clean_kubectx "$1" && \
-        install_kubectx "$1"
+        install_kubectx
     fi
 }
 
@@ -191,7 +111,7 @@ process_minikube_installation() {
 }
 
 main() {
-    process_kubectx_installation "$1" && \
+    process_kubectx_installation && \
     process_kubectl_installation && \
     process_helm_installation && \
     process_minikube_installation && \
@@ -199,21 +119,4 @@ main() {
 }
 
 startup_validation
-
-if [ -z "$1" ]; then
-    while [ -z "$parameter" ]
-    do
-        read -rp "Inform a parameter: (bash/zsh) -> " parameter
-    done
-else
-    parameter="$1"
-fi
-
-valid_parameters=("bash" "zsh")
-
-if [[ ! "${valid_parameters[*]}" =~ ${parameter} ]]; then
-    error_message "The parameter does not valid."
-    exit 1
-fi
-
-main "$parameter"
+main
