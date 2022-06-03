@@ -1,4 +1,5 @@
 # Workshop Introdução ao kubernetes
+
 Workshop sobre Kubernetes, conhecendo e aplicando alguns conceitos básicos de uso do k8s.
 
 Também conheceremos e aplicaremos os conceitos de uso do helm como gerenciador de pacotes para aplicações em cluster kubernetes.
@@ -7,21 +8,24 @@ Também conheceremos e aplicaremos os conceitos de uso do helm como gerenciador 
 [![node](https://img.shields.io/badge/Minikube-v1.25.2-blue.svg)](https://minikube.sigs.k8s.io)
 [![node](https://img.shields.io/badge/Helm-v3.8.2-blue.svg)](https://helm.sh/)
 
-## Sobre o Projeto:
+## Sobre o Projeto
+
 O projeto consiste em dois microsserviços simples baseados no NGINX, ambos possuem uma variável de ambiente de nome `AUTHOR` onde podemos passar um nome ou algo que desejemos que seja exibido junto a mensagem de boas vindas ao acessar o serviço.
 
 </br>
 
-## Arquitetura do projeto:
+## Arquitetura do projeto
 
 [![node](https://github.com/jonathanmdr/workshop-k8s/blob/master/docs/architecture.png)](https://github.com/jonathanmdr/workshop-k8s/blob/master)
 
 </br>
 
-## Setup Ambiente:
+## Setup Ambiente
 
 Execute o script bash `*_setup.sh` para montar o ambiente com os recursos necessários de acordo com o seu sistema operacional.
 
+ > :information_source: Suporte para interpretadores `bash` & `zsh`.
+ >
  > :warning:  O script foi testado somente em distribuições baseadas em Ubuntu e Mac M1.
 
 </br>
@@ -45,21 +49,24 @@ Installation Components |
 
 </br>
 
-#### Exemplo de uso:
+### Exemplo de Uso Setup
 
-##### Linux:
+#### Linux
+
 ```bash
 ~$ ./linux_ubuntu_setup.sh bash #Para quem utiliza o .bashrc
 ~$ ./linux_ubuntu_setup.sh zsh #Para quem utiliza o .zshrc
 ```
 
-##### Mac M1:
+#### Mac M1
+
 ```bash
 ~$ ./mac_m1_setup.sh bash #Para quem utiliza o .bashrc
 ~$ ./mac_m1_setup.sh zsh #Para quem utiliza o .zshrc
 ```
 
-##### Mac x86-64:
+#### Mac x86-64
+
 ```bash
 ~$ ./mac_x86_64_setup.sh bash #Para quem utiliza o .bashrc
 ~$ ./mac_x86_64_setup.sh zsh #Para quem utiliza o .zshrc
@@ -75,15 +82,17 @@ Installation Components |
 
 </br>
 
-## Deploy:
+## Deploy
 
 Execute o script bash `deploy.sh` para subir a aplicação toda no cluster kubernetes local configurado anteriormente no setup.
 
+ > :information_source: Suporte para interpretadores `bash` & `zsh`.
+ >
  > :warning:  O script foi testado somente em distribuições Linux baseadas em Ubuntu e Mac M1.
 
 </br>
 
-#### Exemplo de uso:
+### Exemplo de Uso Deploy
 
 ```bash
 ~$ ./deploy.sh up #Para fazer o deploy da aplicação
