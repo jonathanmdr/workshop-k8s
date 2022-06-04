@@ -26,7 +26,7 @@ Execute o script bash `*_setup.sh` para montar o ambiente com os recursos necess
 
  > :information_source: Suporte para interpretadores `bash` & `zsh`.
  >
- > :warning:  O script foi testado somente em distribuições baseadas em Ubuntu e Mac M1.
+ > :warning:  O script foi testado somente em distribuições Linux baseadas no Debian, Mac x86-64 e M1.
 
 </br>
 
@@ -86,7 +86,7 @@ Execute o script bash `deploy.sh` para subir a aplicação toda no cluster kuber
 
  > :information_source: Suporte para interpretadores `bash` & `zsh`.
  >
- > :warning:  O script foi testado somente em distribuições Linux baseadas em Ubuntu e Mac M1.
+ > :warning:  O script foi testado somente em distribuições Linux baseadas no Debian, Mac x86-64 e M1.
 
 </br>
 
