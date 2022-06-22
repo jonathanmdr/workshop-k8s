@@ -22,16 +22,25 @@ info_message() {
     printf "\n${GREEN} INFO: ${DEFAULT}%s \n\n" "$1"
 }
 
+update_sources() {
+    source ~/.bash_profile &> /dev/null && \
+    source ~/.bashrc &> /dev/null && \
+    source ~/.zshrc &> /dev/null
+}
+
 install_kubectx() {    
-    brew install kubectx
+    brew install kubectx && \
+    update_sources
 }
 
 install_kubectl() {
-    brew install kubectl
+    brew install kubectl && \
+    update_sources
 }
 
 install_helm() {
-    brew install helm
+    brew install helm && \
+    update_sources
 }
 
 clean_minikube() {
@@ -50,7 +59,8 @@ install_minikube() {
     info_message "Enabled Addons: " && \
     minikube addons list | grep STATUS && minikube addons list | grep enabled && \
     info_message "Current status of Minikube: " && \
-    minikube status
+    minikube status && \
+    update_sources
 }
 
 validate_mandatory_resource() {

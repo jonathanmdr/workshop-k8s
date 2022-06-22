@@ -4,9 +4,9 @@ Workshop sobre Kubernetes, conhecendo e aplicando alguns conceitos básicos de u
 
 Também conheceremos e aplicaremos os conceitos de uso do helm como gerenciador de pacotes para aplicações em cluster kubernetes.
 
-[![node](https://img.shields.io/badge/Kubernetes-v1.24-blue.svg)](https://kubernetes.io)
-[![node](https://img.shields.io/badge/Minikube-v1.25.2-blue.svg)](https://minikube.sigs.k8s.io)
-[![node](https://img.shields.io/badge/Helm-v3.8.2-blue.svg)](https://helm.sh/)
+[![node](https://img.shields.io/badge/Kubernetes-latest-blue.svg)](https://kubernetes.io)
+[![node](https://img.shields.io/badge/Minikube-latest-blue.svg)](https://minikube.sigs.k8s.io)
+[![node](https://img.shields.io/badge/Helm-latest-blue.svg)](https://helm.sh/)
 
 ## Sobre o Projeto
 
